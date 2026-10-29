@@ -3,7 +3,7 @@ name: nixos-admin
 description: Guide best practices for maintaining NixOS systems. Use for system administration, declarative configuration, controlled upgrades, nixos-rebuild, failed services, disk or Nix store pressure, generations, rollback, backup and boot recovery, remote deployment, provisioning, Home Manager, and Nix development environments. Prioritise reproducibility, recovery readiness, minimal changes, and verified service health.
 license: MIT
 metadata:
-  version: "1.0.2"
+  version: "1.0.3"
 ---
 
 # NixOS administration
@@ -37,6 +37,7 @@ Resolve these paths relative to this skill directory, or use `skill://nixos-admi
 - Use existing deployment, secret, backup, monitoring, and configuration tools. Prefer pinned flakes for new configurations; support existing channels without silently migrating them. No new daemon, MCP server, timer, binary cache, or dependency merely to use this skill.
 - Do not expose secrets in chat, logs, derivations, source files copied into the store, or command arguments. Follow the user's authentication procedure before authentication. Secret refresh is not a side effect of a rebuild.
 - Preserve application access and selected versions when changing package ownership. Follow the [application access checks](references/configuration.md#preserve-application-access) before and after activation.
+- Preserve working credential paths and existing ownership. Follow the [credential path checks](references/configuration.md#preserve-credential-paths) before an approved ownership change.
 
 ## Establish facts, then ask what remains unknown
 

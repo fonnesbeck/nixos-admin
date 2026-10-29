@@ -31,7 +31,7 @@ These are historical observations, not a live inventory or a promise of health.
 | Application services | Collie and Dropbox services follow the inventory. Voxtype's daemon stays separately opt-in. |
 | Compatibility defaults | `system.stateVersion` and `home.stateVersion` were `26.05`; not upgrade targets. |
 | Boot/desktop/network declarations | systemd-boot, `linuxPackages_latest`, GNOME/GDM, NetworkManager, Tailscale. Verify the actual running kernel/session/network before drawing conclusions. |
-| Secrets boundary | `home/secrets.nix` references private runtime files under `~/.local/state/dotfiles/secrets/current`; an explicit refresh command is packaged. Activation does not refresh credentials. Do not inspect secret contents or refresh them for routine verification. |
+| Secrets boundary (agreed repair) | SSH private keys stay user-owned at their working paths. Home Manager must not replace them with runtime links. Shell and marimo secrets retain runtime generation under `~/.local/state/dotfiles/secrets/current` and explicit refresh. Activation does not refresh credentials. Do not inspect secret contents or refresh them for routine verification. |
 | Project tools | The flake declares a development shell including Nix formatting and Python test tooling, plus a checks output. Inspect the current project workflow before running it; this skill itself is Markdown only. |
 | OMP | `18.13.3`; native global skill layout is `~/.omp/agent/skills/<name>/SKILL.md`. |
 

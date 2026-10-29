@@ -75,6 +75,25 @@ After approved activation, repeat the comparison against the active profiles. Ex
 
 Report package membership, version, entry-point availability, session discovery, and actual launch as separate checks. A missing system path does not prove an application disappeared from every profile. A successful application query does not prove that the desktop shows the launcher. State any visual or runtime verification limit.
 
+## Preserve credential paths
+
+Keep working credential files and their paths under the existing owner by default. Home Manager configuration work does not authorize ownership changes for SSH private keys or other credentials.
+
+`home-manager.backupFileExtension` moves conflicting files to backup names during activation. A backup preserves recovery material, not access through the original path. Do not accept a broken credential path because a backup exists.
+
+Do not use backups or forced replacement to bypass an unresolved ownership collision.
+
+Before an explicitly approved ownership change:
+
+1. Record the working path, file owner, permissions, link targets, and consumer configuration without displaying secret contents.
+2. Check the replacement target in the actual user context, including runtime generation, availability, permissions, and activation order.
+3. Check the consumer against the replacement before activation through an approved local check. Preserve the working path if this check fails.
+4. Define restoration of the working path if activation or the consumer check fails. A generation rollback alone does not restore moved files.
+
+Do not replace a working file with a dangling runtime link. `mkOutOfStoreSymlink` does not create its external target or prove that the consumer can use it. Keep valid out-of-store secret links when the user explicitly selects that workflow and these checks succeed.
+
+After approved activation, repeat the path, target, permissions, and consumer checks in the actual user context. Report local key usability separately from remote authentication. Do not connect to a remote host without approval.
+
 ## Secrets and mutable configuration
 
 Store references or encrypted material in configuration, not plaintext secret contents. `builtins.readFile` does not make a secret safe: evaluation can copy the value into a derivation or generated world-readable store file. Treat flake source snapshots as public to local users. Inspect files before staging or copying them into the store.

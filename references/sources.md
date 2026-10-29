@@ -55,6 +55,7 @@ Also check package-list consolidation without profile migration, and a requested
 
 ## Change history
 
+- 1.0.3 — Preserve working credential paths during Home Manager changes. Explain collision backups and runtime target checks. Keep SSH private keys user-owned.
 - 1.0.2 — Keep source in the project repository and link the global OMP installation to it. Add project installation instructions and an MIT license.
 - 1.0.1 — Add application-access comparisons before and after ownership changes. Correct avalon's Home Manager output and inventory facts. Clarify SSH transport checks and rollback verification. Activation approval rules stay unchanged.
 - 1.0.0 — Initial maintenance-first decision guide and runbooks: controlled updates, revision-specific option checks, approval before activation, recovery readiness, safe storage retention, supporting remote/provisioning workflows, and separately dated avalon observations. Markdown only; no executable automation.
@@ -70,3 +71,11 @@ This skill review made no NixOS configuration changes and ran no system activati
 Verification for 1.0.2: Git reports all nine project files. The global skill link resolves to this checkout. Fresh OMP reads load the core and all six references.
 
 The README installation command created the expected link under a temporary home directory. A repeated installation refused the existing target without replacing it. README and core links resolve, and the skill metadata names the MIT license.
+
+Review for 1.0.3 on 2026-10-28: this review found no instruction that mandates credential replacement. The configuration reference lacked explicit credential path, collision backup, and runtime link safeguards. Activation approval rules stay unchanged.
+
+Verification for 1.0.3: native OMP reads resolved the installed skill and configuration reference. All 21 relative file links resolved. All 12 Bash blocks passed syntax checks.
+
+A fresh OMP session with tools disabled answered three credential ownership scenarios. It rejected migration to an absent target and kept exact restoration and activation approval. It accepted an explicitly selected, verified out-of-store workflow.
+
+These checks cover guidance loading and sampled decisions, not live system recovery or future agent behavior.
